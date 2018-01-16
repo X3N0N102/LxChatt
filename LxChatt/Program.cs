@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LxChatt
 {
-    //Av Alexander Mlakar NTI Gymnasiet 2018
+    //Av Alexander Mlakar NTI Gymnasiet 2018.
     //Utifrån aritkel från C-Sharpskolan http://csharpskolan.se/article/broadcast-och-chatt
     class Program
     {
