@@ -25,30 +25,32 @@ namespace LxChatt
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             socket.EnableBroadcast = true;
             IPEndPoint ep = new IPEndPoint(IPAddress.Broadcast, ListenPort);
-
             Thread.Sleep(1000);
 
             while (true)
             {
                 Console.Write(">");
                 string msg = Console.ReadLine();
-
                 byte[] sendbuf = Encoding.UTF8.GetBytes(msg);
                 socket.SendTo(sendbuf, ep);
             }
-
         }
-
+        
         static void Listener()
         {
             UdpClient listener = new UdpClient(ListenPort);
 
             try
             {
-                while (true) { 
-                    IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, ListenPort);
+                while (true) {
+                    IPEndPoint groupEP = new IPEndPoint(IPAddress.Parse("192.168.81.55"), ListenPort);
+
+
+                    Console.ForegroundColor = ConsoleColor.Green;
                     byte[] bytes = listener.Receive(ref groupEP);
-                    Console.WriteLine("Recived broadcast from {0} : {1}\n", groupEP.ToString(), Encoding.UTF8.GetString(bytes, 0, bytes.Length));
+                    Console.WriteLine("Recived broadcast from {0} : {1}\n", groupEP.ToString(), DateTime.Now + " " + Encoding.UTF8.GetString(bytes, 0, bytes.Length));
+                    Console.ForegroundColor = ConsoleColor.White;
+
                 }
             }
             catch (Exception e)
